@@ -1,18 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Order Form</title>
+    <title>Place Order</title>
 </head>
 <body>
 
-<h2>Order Details</h2>
+<h2>Restaurant Management System</h2>
+<h3>Place Order</h3>
 
 <form action="../backend/insert.php" method="post">
-    Customer ID: <input type="number" name="cust_id"><br><br>
-    Item Name: <input type="text" name="item"><br><br>
-    Quantity: <input type="number" name="qty"><br><br>
+
+    <label>Customer ID:</label><br>
+    <input type="number" name="cust_id" required><br><br>
+
+    <label>Select Item:</label><br>
+    <select name="item">
+        <option value="Pizza">Pizza</option>
+        <option value="Burger">Burger</option>
+        <option value="Pasta">Pasta</option>
+        <option value="Fried Rice">Fried Rice</option>
+    </select><br><br>
+
+    <label>Quantity:</label><br>
+    <input type="number" name="qty" required><br><br>
 
     <input type="submit" value="Place Order">
+
 </form>
 
 </body>

@@ -1,18 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Customer Form</title>
+    <title>Customer Registration</title>
 </head>
 <body>
 
-<h2>Customer Details</h2>
+<h2>Restaurant Management System</h2>
+<h3>Customer Registration</h3>
 
 <form action="../backend/insert.php" method="post">
-    Name: <input type="text" name="name"><br><br>
-    Phone: <input type="text" name="phone"><br><br>
-    Address: <input type="text" name="address"><br><br>
 
-    <input type="submit" value="Submit">
+    <label>Customer Name:</label><br>
+    <input type="text" name="name" required><br><br>
+
+    <label>Phone Number:</label><br>
+    <input type="text" name="phone" required><br><br>
+
+    <label>Address:</label><br>
+    <textarea name="address" required></textarea><br><br>
+
+    <input type="submit" value="Register Customer">
+
 </form>
 
 </body>
