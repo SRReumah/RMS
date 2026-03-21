@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Payment</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: linear-gradient(to right, #ffecd2, #fcb69f);
+    text-align: center;
+}
+form {
+    background: white;
+    padding: 20px;
+    width: 300px;
+    margin: auto;
+    border-radius: 10px;
+}
+input {
+    width: 90%;
+    padding: 8px;
+    margin: 5px;
+}
+</style>
+</head>
+
+<body>
+
+<h2>Payment</h2>
+
+<form action="../backend/insert.php" method="post">
+
+<input type="number" name="payment_id" placeholder="Payment ID"><br>
+<input type="number" name="order_id" placeholder="Order ID"><br>
+<input type="number" name="amount" placeholder="Amount"><br>
+<input type="text" name="payment_mode" placeholder="Payment Mode"><br>
+
+<input type="submit" value="Make Payment">
+</form>
+
+</body>
+</html>

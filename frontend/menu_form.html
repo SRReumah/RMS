@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Menu</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: linear-gradient(to right, #ffecd2, #fcb69f);
+    text-align: center;
+}
+form {
+    background: white;
+    padding: 20px;
+    width: 300px;
+    margin: auto;
+    border-radius: 10px;
+}
+input {
+    width: 90%;
+    padding: 8px;
+    margin: 5px;
+}
+</style>
+</head>
+
+<body>
+
+<h2>Menu</h2>
+
+<form action="../backend/insert.php" method="post">
+
+<input type="number" name="menu_id" placeholder="Menu ID"><br>
+<input type="text" name="item_name" placeholder="Item Name"><br>
+<input type="number" name="price" placeholder="Price"><br>
+
+<input type="submit" value="Add Item">
+</form>
+
+</body>
+</html>
