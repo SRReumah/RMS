@@ -5,67 +5,75 @@
     <title>Restaurant Management System</title>
 
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to right, #ffecd2, #fcb69f);
-            text-align: center;
-            margin: 0;
-            padding: 0;
-        }
+body {
+    font-family: 'Segoe UI', Arial;
+    background: linear-gradient(to right, #ffecd2, #fcb69f);
+    margin: 0;
+}
 
-        .container {
-            margin-top: 100px;
-        }
+/* Navbar */
+.navbar {
+    background-color: #ff7b54;
+    padding: 15px;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+}
 
-        h1 {
-            color: #333;
-        }
+/* Card container */
+.container {
+    width: 350px;
+    margin: 50px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.2);
+}
 
-        .btn {
-            display: block;
-            width: 200px;
-            margin: 15px auto;
-            padding: 12px;
-            font-size: 16px;
-            color: white;
-            background-color: #ff7b54;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+/* Inputs */
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
 
-        .btn:hover {
-            background-color: #ff5722;
-        }
-    </style>
+/* Buttons */
+button, input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #ff7b54;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #ff5722;
+}
+
+/* Back button */
+.back {
+    margin-top: 10px;
+    background: #555;
+}
+</style>
 </head>
 
 <body>
 
+<div class="navbar">🍽 Restaurant Management System</div>
+
 <div class="container">
-    <h1>🍽 Restaurant Management System</h1>
-    <h3>Welcome</h3>
+    <h3>Dashboard</h3>
 
-    <button class="btn" onclick="location.href='customer_form.html'">
-        Register Customer
-    </button>
-
-    <button class="btn" onclick="location.href='order_form.html'">
-        Place Order
-    </button>
-    
-     <button class="btn" onclick="location.href='menu_form.html'">
-        Menu
-    </button>
-
-    <button class="btn" onclick="location.href='staff_form.html'">
-        Staff
-    </button>
-
-    <button class="btn" onclick="location.href='payment_form.html'">
-        Payment
-    </button>
+    <button onclick="location.href='customer_form.html'">Customer</button>
+    <button onclick="location.href='order_form.html'">Orders</button>
+    <button onclick="location.href='menu_form.html'">Menu</button>
+    <button onclick="location.href='staff_form.html'">Staff</button>
+    <button onclick="location.href='payment_form.html'">Payment</button>
 </div>
 
 </body>

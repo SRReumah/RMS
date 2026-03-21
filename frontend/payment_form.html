@@ -6,38 +6,81 @@
 
 <style>
 body {
-    font-family: Arial;
+    font-family: 'Segoe UI', Arial;
     background: linear-gradient(to right, #ffecd2, #fcb69f);
+    margin: 0;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #ff7b54;
+    padding: 15px;
+    color: white;
+    font-size: 20px;
     text-align: center;
 }
-form {
+
+/* Card container */
+.container {
+    width: 350px;
+    margin: 50px auto;
     background: white;
-    padding: 20px;
-    width: 300px;
-    margin: auto;
-    border-radius: 10px;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.2);
 }
-input {
-    width: 90%;
-    padding: 8px;
-    margin: 5px;
+
+/* Inputs */
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+/* Buttons */
+button, input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #ff7b54;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #ff5722;
+}
+
+/* Back button */
+.back {
+    margin-top: 10px;
+    background: #555;
 }
 </style>
 </head>
 
 <body>
 
-<h2>Payment</h2>
+<div class="navbar">Customer Management</div>
+
+<div class="container">
 
 <form action="../backend/insert.php" method="post">
 
-<input type="number" name="payment_id" placeholder="Payment ID"><br>
-<input type="number" name="order_id" placeholder="Order ID"><br>
-<input type="number" name="amount" placeholder="Amount"><br>
-<input type="text" name="payment_mode" placeholder="Payment Mode"><br>
+<input type="number" name="customer_id" placeholder="Customer ID">
+<input type="text" name="customer_name" placeholder="Name">
+<input type="text" name="phone" placeholder="Phone">
 
-<input type="submit" value="Make Payment">
+<input type="submit" value="Add Customer">
+
+<button class="back" onclick="location.href='index.html'">Back</button>
+
 </form>
+
+</div>
 
 </body>
 </html>
