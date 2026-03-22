@@ -1,63 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Restaurant Management System</title>
+<meta charset="UTF-8">
+<title>RMS</title>
 
-    <style>
+<style>
 body {
-    font-family: 'Segoe UI', Arial;
+    font-family: 'Segoe UI';
     background: linear-gradient(to right, #ffecd2, #fcb69f);
     margin: 0;
 }
-
-/* Navbar */
 .navbar {
-    background-color: #ff7b54;
-    padding: 15px;
+    background: #ff7b54;
     color: white;
-    font-size: 20px;
+    padding: 15px;
     text-align: center;
 }
-
-/* Card container */
 .container {
     width: 350px;
-    margin: 50px auto;
+    margin: 60px auto;
     background: white;
     padding: 25px;
     border-radius: 12px;
-    box-shadow: 0px 5px 15px rgba(0,0,0,0.2);
+    text-align: center;
 }
-
-/* Inputs */
-input, select, textarea {
+button {
     width: 100%;
     padding: 10px;
-    margin: 8px 0;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-}
-
-/* Buttons */
-button, input[type="submit"] {
-    width: 100%;
-    padding: 10px;
-    background-color: #ff7b54;
+    margin: 8px;
+    background: #ff7b54;
     color: white;
     border: none;
     border-radius: 6px;
     cursor: pointer;
-}
-
-button:hover {
-    background-color: #ff5722;
-}
-
-/* Back button */
-.back {
-    margin-top: 10px;
-    background: #555;
 }
 </style>
 </head>
@@ -67,13 +42,14 @@ button:hover {
 <div class="navbar">🍽 Restaurant Management System</div>
 
 <div class="container">
-    <h3>Dashboard</h3>
+<h3>Dashboard</h3>
 
-    <button onclick="location.href='customer_form.html'">Customer</button>
-    <button onclick="location.href='order_form.html'">Orders</button>
-    <button onclick="location.href='menu_form.html'">Menu</button>
-    <button onclick="location.href='staff_form.html'">Staff</button>
-    <button onclick="location.href='payment_form.html'">Payment</button>
+<button onclick="location.href='customer_form.html'">Customer</button>
+<button onclick="location.href='order_form.html'">Orders</button>
+<button onclick="location.href='menu_form.html'">Menu</button>
+<button onclick="location.href='staff_form.html'">Staff</button>
+<button onclick="location.href='payment_form.html'">Payment</button>
+
 </div>
 
 </body>

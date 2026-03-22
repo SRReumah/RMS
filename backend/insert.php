@@ -1,40 +1,48 @@
 <?php
-$conn = new mysqli("localhost", "root", "", "rms");
+$conn = new mysqli("localhost","root","","rms");
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+if($conn->connect_error){
+    die("Connection failed");
 }
 
-// Customer form
-if (isset($_POST['name'])) {
-    $name = $_POST['name'];
-    $phone = $_POST['phone'];
-    $address = $_POST['address'];
+// CUSTOMER
+if(isset($_POST['customer_name'])){
+    $sql = "INSERT INTO customer VALUES ('$_POST[customer_id]','$_POST[customer_name]','$_POST[phone]')";
+    $conn->query($sql);
 
-    $sql = "INSERT INTO customer (name, phone, address)
-            VALUES ('$name', '$phone', '$address')";
-
-    if ($conn->query($sql) === TRUE) {
-        echo "Customer added successfully";
-    } else {
-        echo "Error: " . $conn->error;
-    }
+    echo "<script>alert('Customer Added');window.location.href='../frontend/index.html';</script>";
 }
 
-// Order form
-if (isset($_POST['cust_id'])) {
-    $cust_id = $_POST['cust_id'];
-    $item = $_POST['item'];
-    $qty = $_POST['qty'];
+// ORDERS
+if(isset($_POST['order_id'])){
+    $sql = "INSERT INTO orders VALUES ('$_POST[order_id]','$_POST[customer_id]','$_POST[staff_id]','$_POST[order_date]')";
+    $conn->query($sql);
 
-    $sql = "INSERT INTO orders (cust_id, item, quantity)
-            VALUES ('$cust_id', '$item', '$qty')";
+    echo "<script>alert('Order Added');window.location.href='../frontend/index.html';</script>";
+}
 
-    if ($conn->query($sql) === TRUE) {
-        echo "Order placed successfully";
-    } else {
-        echo "Error: " . $conn->error;
-    }
+// MENU
+if(isset($_POST['item_name'])){
+    $sql = "INSERT INTO menu VALUES ('$_POST[menu_id]','$_POST[item_name]','$_POST[price]')";
+    $conn->query($sql);
+
+    echo "<script>alert('Menu Item Added');window.location.href='../frontend/index.html';</script>";
+}
+
+// STAFF
+if(isset($_POST['staff_name'])){
+    $sql = "INSERT INTO staff VALUES ('$_POST[staff_id]','$_POST[staff_name]','$_POST[role]')";
+    $conn->query($sql);
+
+    echo "<script>alert('Staff Added');window.location.href='../frontend/index.html';</script>";
+}
+
+// PAYMENT
+if(isset($_POST['payment_id'])){
+    $sql = "INSERT INTO payment VALUES ('$_POST[payment_id]','$_POST[order_id]','$_POST[amount]','$_POST[payment_mode]')";
+    $conn->query($sql);
+
+    echo "<script>alert('Payment Done');window.location.href='../frontend/index.html';</script>";
 }
 
 $conn->close();
