@@ -4,12 +4,13 @@ $conn = new mysqli("localhost","root","","rms");
 if($conn->connect_error){
     die("Connection failed");
 }
-
-// CUSTOMER
+//CUSTOMERS
 if(isset($_POST['customer_name'])){
-    $sql = "INSERT INTO customer VALUES ('$_POST[customer_id]','$_POST[customer_name]','$_POST[phone]')";
-    $conn->query($sql);
-
+    $stmt = $conn->prepare("INSERT INTO customer VALUES (?, ?, ?)");
+    $stmt->bind_param("sss", $_POST['customer_id'], $_POST['customer_name'], $_POST['phone']);
+    $stmt->execute();
+    $stmt->close();
+    
     echo "<script>alert('Customer Added');window.location.href='../frontend/index.html';</script>";
 }
 
