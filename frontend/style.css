@@ -61,3 +61,9 @@ button {
 .back:hover {
     background: #000;
 }
+
+.h3 {
+    text-align: center;
+    color: #444;
+    margin-bottom: 15px;
+}
