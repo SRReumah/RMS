@@ -13,10 +13,10 @@
 <div class="container">
 <form action="../backend/insert.php" method="post">
 
-<input name="order_id" placeholder="Order ID">
-<input name="customer_id" placeholder="Customer ID">
-<input name="staff_id" placeholder="Staff ID">
-<input type="date" name="order_date">
+<input name="order_id" placeholder="Order ID" required>
+<input name="customer_id" placeholder="Customer ID (e.g. C001)" required>
+<input name="staff_id" placeholder="Staff ID (e.g. S001)" required>
+<input type="date" name="order_date" required>
 
 <input type="submit" value="Create Order">
 <button type="button" class="back" onclick="location.href='index.html'">Back</button>

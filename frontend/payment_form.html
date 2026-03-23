@@ -14,9 +14,9 @@
 <form action="../backend/insert.php" method="post">
 
 <input name="payment_id" placeholder="Payment ID">
-<input name="order_id" placeholder="Order ID">
-<input name="amount" placeholder="Amount">
-<input name="payment_mode" placeholder="Payment Mode">
+<input name="order_id" placeholder="Order ID (e.g. ORD001)" required>
+<input name="amount" placeholder="Amount" required>
+<input name="payment_mode" placeholder="Payment Mode (Cash/UPI)" required>
 
 <input type="submit" value="Make Payment">
 <button type="button" class="back" onclick="location.href='index.html'">Back</button>

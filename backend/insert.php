@@ -15,13 +15,22 @@ if(isset($_POST['customer_name'])){
 }
 
 // ORDERS
-if(isset($_POST['order_id'])){
-    $sql = "INSERT INTO orders VALUES ('$_POST[order_id]','$_POST[customer_id]','$_POST[staff_id]','$_POST[order_date]')";
-    $conn->query($sql);
+if(isset($_POST['order_id']) && isset($_POST['customer_id'])){
 
-    echo "<script>alert('Order Added');window.location.href='../frontend/index.html';</script>";
+    $order_id = $_POST['order_id'];
+    $customer_id = $_POST['customer_id'];
+    $staff_id = $_POST['staff_id'];
+    $order_date = $_POST['order_date'];
+
+    $sql = "INSERT INTO orders (order_id, customer_id, staff_id, order_date)
+            VALUES ('$order_id','$customer_id','$staff_id','$order_date')";
+
+    if($conn->query($sql)){
+        echo "<script>alert('Order Added');window.location.href='../frontend/index.html';</script>";
+    } else {
+        echo "<script>alert('Error: Check Customer ID / Staff ID exists');history.back();</script>";
+    }
 }
-
 // MENU
 if(isset($_POST['item_name'])){
     $sql = "INSERT INTO menu VALUES ('$_POST[menu_id]','$_POST[item_name]','$_POST[price]')";
@@ -39,12 +48,21 @@ if(isset($_POST['staff_name'])){
 }
 
 // PAYMENT
-if(isset($_POST['payment_id'])){
-    $sql = "INSERT INTO payment VALUES ('$_POST[payment_id]','$_POST[order_id]','$_POST[amount]','$_POST[payment_mode]')";
-    $conn->query($sql);
+if(isset($_POST['payment_id']) && isset($_POST['order_id'])){
 
-    echo "<script>alert('Payment Done');window.location.href='../frontend/index.html';</script>";
+    $payment_id = $_POST['payment_id'];
+    $order_id = $_POST['order_id'];
+    $amount = $_POST['amount'];
+    $mode = $_POST['payment_mode'];
+
+    $sql = "INSERT INTO payment (payment_id, order_id, amount, payment_mode)
+            VALUES ('$payment_id','$order_id','$amount','$mode')";
+
+    if($conn->query($sql)){
+        echo "<script>alert('Payment Done');window.location.href='../frontend/index.html';</script>";
+    } else {
+        echo "<script>alert('Error: Order ID not found');history.back();</script>";
+    }
 }
-
 $conn->close();
 ?>
