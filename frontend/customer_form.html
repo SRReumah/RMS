@@ -2,25 +2,32 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Customer</title>
+<title>The Hungry Fork | Customer Management</title>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-
 <body>
 
-<div class="navbar">Customer Management</div>
+<div class="navbar">
+  <i class="fas fa-user-friends"></i>
+  Customer Management
+</div>
 
 <div class="container">
-<form action="../backend/insert.php" method="post">
-
-<input name="customer_id" placeholder="Customer ID">
-<input name="customer_name" placeholder="Name">
-<input name="phone" placeholder="Phone">
-
-<input type="submit" value="Add Customer">
-<button type="button" class="back" onclick="location.href='index.html'">Back</button>
-
-</form>
+  <form action="../backend/insert.php" method="post">
+    <h3><i class="fas fa-user-plus"></i> Add New Customer</h3>
+    
+    <input name="customer_id" placeholder="Customer ID (e.g., C001)" autocomplete="off">
+    <input name="customer_name" placeholder="Full Name" required>
+    <input name="phone" placeholder="Phone Number" required>
+    
+    <div class="button-group">
+      <input type="submit" value="Add Customer">
+      <button type="button" class="back" onclick="location.href='index.html'">
+        <i class="fas fa-arrow-left"></i> Back to Dashboard
+      </button>
+    </div>
+  </form>
 </div>
 
 </body>

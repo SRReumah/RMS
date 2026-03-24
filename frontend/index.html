@@ -1,26 +1,137 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>RMS</title>
-<link rel="stylesheet" href="style.css">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>The Hungry Fork | RMS Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-
 <body>
 
-<div class="navbar"> 🍽 The Hungry Fork : A Restaurant Management System</div>
-
-<div class="container">
-<h3> Management Panel </h3>
-
-<button onclick="location.href='customer_form.html'">Customer</button>
-<button onclick="location.href='order_form.html'">Orders</button>
-<button onclick="location.href='menu_form.html'">Menu</button>
-<button onclick="location.href='staff_form.html'">Staff</button>
-<button onclick="location.href='payment_form.html'">Payment</button>
-
+<div class="navbar">
+  <i class="fas fa-utensils"></i>
+  🍽 The Hungry Fork : A Restaurant Management System
+  <span>RMS v2.0</span>
 </div>
 
+<div class="dashboard-container">
+  <div class="header-section">
+    <div class="title-area">
+      <h3><i class="fas fa-sliders-h" style="font-size: 1.6rem; margin-right: 8px; color: #c97e3f;"></i> Management Panel</h3>
+      <p><i class="fas fa-chalkboard-user"></i> Centralized operations · real‑time insights</p>
+    </div>
+    <div class="date-badge">
+      <i class="far fa-calendar-alt"></i> 
+      <span id="liveDate"></span>
+    </div>
+  </div>
+
+  <div class="management-grid">
+    <div class="card" data-module="customer">
+      <div class="card-inner">
+        <div class="card-icon"><i class="fas fa-user-friends"></i></div>
+        <h4>Customer</h4>
+        <div class="card-desc">Manage guest profiles, preferences, and reservation history.</div>
+        <div class="card-action">
+          <button class="btn-modern" data-action="customer"><span>Access registry</span> <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-module="orders">
+      <div class="card-inner">
+        <div class="card-icon"><i class="fas fa-clipboard-list"></i></div>
+        <h4>Orders</h4>
+        <div class="card-desc">Track active orders, kitchen status, and delivery timeline.</div>
+        <div class="card-action">
+          <button class="btn-modern" data-action="orders"><span>Manage orders</span> <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-module="menu">
+      <div class="card-inner">
+        <div class="card-icon"><i class="fas fa-book-open"></i></div>
+        <h4>Menu</h4>
+        <div class="card-desc">Curate dishes, update pricing, seasonal specials & nutritional tags.</div>
+        <div class="card-action">
+          <button class="btn-modern" data-action="menu"><span>Edit menu</span> <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-module="staff">
+      <div class="card-inner">
+        <div class="card-icon"><i class="fas fa-user-tie"></i></div>
+        <h4>Staff</h4>
+        <div class="card-desc">Employee scheduling, roles, payroll overview and performance hub.</div>
+        <div class="card-action">
+          <button class="btn-modern" data-action="staff"><span>Staff directory</span> <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-module="payment">
+      <div class="card-inner">
+        <div class="card-icon"><i class="fas fa-credit-card"></i></div>
+        <h4>Payment</h4>
+        <div class="card-desc">Transactions, invoices, split bills and digital receipts.</div>
+        <div class="card-action">
+          <button class="btn-modern" data-action="payment"><span>Process payments</span> <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-item"><i class="fas fa-chart-line"></i><div><span class="stat-number">24</span> active tables</div></div>
+    <div class="stat-item"><i class="fas fa-receipt"></i><div><span class="stat-number">142</span> orders today</div></div>
+    <div class="stat-item"><i class="fas fa-users"></i><div><span class="stat-number">12</span> staff on duty</div></div>
+    <div class="stat-item"><i class="fas fa-star"></i><div><span class="stat-number">4.9</span> rating · 1.2k reviews</div></div>
+  </div>
+  <footer><i class="far fa-clock"></i> Real-time management · The Hungry Fork RMS — streamlined hospitality</footer>
+</div>
+
+<script>
+  (function() {
+    const dateElem = document.getElementById('liveDate');
+    if (dateElem) {
+      const now = new Date();
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      dateElem.textContent = now.toLocaleDateString(undefined, options);
+    }
+
+    const routeMap = {
+      customer: 'customer_form.html',
+      orders: 'order_form.html',
+      menu: 'menu_form.html',
+      staff: 'staff_form.html',
+      payment: 'payment_form.html'
+    };
+
+    function navigateTo(moduleId) {
+      const targetFile = routeMap[moduleId];
+      if (targetFile) window.location.href = targetFile;
+    }
+
+    document.querySelectorAll('.btn-modern[data-action]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const action = btn.getAttribute('data-action');
+        if (routeMap[action]) navigateTo(action);
+      });
+    });
+
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('click', (e) => {
+        if (e.target.closest('.btn-modern')) return;
+        const module = card.getAttribute('data-module');
+        if (routeMap[module]) navigateTo(module);
+      });
+      card.style.cursor = 'pointer';
+    });
+  })();
+</script>
 </body>
 </html>

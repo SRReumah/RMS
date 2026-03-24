@@ -2,26 +2,33 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Orders</title>
+<title>The Hungry Fork | Order Management</title>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-
 <body>
 
-<div class="navbar">Order Management</div>
+<div class="navbar">
+  <i class="fas fa-clipboard-list"></i>
+  Order Management
+</div>
 
 <div class="container">
-<form action="../backend/insert.php" method="post">
-
-<input name="order_id" placeholder="Order ID" required>
-<input name="customer_id" placeholder="Customer ID (e.g. C001)" required>
-<input name="staff_id" placeholder="Staff ID (e.g. S001)" required>
-<input type="date" name="order_date" required>
-
-<input type="submit" value="Create Order">
-<button type="button" class="back" onclick="location.href='index.html'">Back</button>
-
-</form>
+  <form action="../backend/insert.php" method="post">
+    <h3><i class="fas fa-shopping-cart"></i> Create New Order</h3>
+    
+    <input name="order_id" placeholder="Order ID (e.g., ORD001)" required>
+    <input name="customer_id" placeholder="Customer ID (e.g., C001)" required>
+    <input name="staff_id" placeholder="Staff ID (e.g., S001)" required>
+    <input type="date" name="order_date" required>
+    
+    <div class="button-group">
+      <input type="submit" value="Create Order">
+      <button type="button" class="back" onclick="location.href='index.html'">
+        <i class="fas fa-arrow-left"></i> Back to Dashboard
+      </button>
+    </div>
+  </form>
 </div>
 
 </body>

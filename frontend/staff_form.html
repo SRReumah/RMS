@@ -2,25 +2,32 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Staff</title>
+<title>The Hungry Fork | Staff Management</title>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-
 <body>
 
-<div class="navbar">Staff Management</div>
+<div class="navbar">
+  <i class="fas fa-user-tie"></i>
+  Staff Management
+</div>
 
 <div class="container">
-<form action="../backend/insert.php" method="post">
-
-<input name="staff_id" placeholder="Staff ID">
-<input name="staff_name" placeholder="Staff Name">
-<input name="role" placeholder="Role">
-
-<input type="submit" value="Add Staff">
-<button type="button" class="back" onclick="location.href='index.html'">Back</button>
-
-</form>
+  <form action="../backend/insert.php" method="post">
+    <h3><i class="fas fa-users"></i> Add Staff Member</h3>
+    
+    <input name="staff_id" placeholder="Staff ID (e.g., S001)" autocomplete="off">
+    <input name="staff_name" placeholder="Staff Name" required>
+    <input name="role" placeholder="Role (e.g., Chef, Waiter, Manager)" required>
+    
+    <div class="button-group">
+      <input type="submit" value="Add Staff">
+      <button type="button" class="back" onclick="location.href='index.html'">
+        <i class="fas fa-arrow-left"></i> Back to Dashboard
+      </button>
+    </div>
+  </form>
 </div>
 
 </body>
