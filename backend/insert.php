@@ -11,16 +11,15 @@ $conn->set_charset("utf8mb4");
 
 // Helper function for safe redirection
 function redirectWithMessage($message, $isError = false) {
-    $type = $isError ? 'error' : 'success';
     echo "<script>
-        alert('" . addslashes($message) . "');
-        window.location.href = '../frontend/index.html';
-    </script>";
+            alert('" . addslashes($message) . "');
+            window.location.href = '../frontend/index.html';
+          </script>";
     exit();
 }
 
 // ========== CUSTOMER INSERT ==========
-if (isset($_POST['customer_name']) && !isset($_POST['order_id'])) {
+if (isset($_POST['customer_name']) && !isset($_POST['order_id']) && !isset($_POST['item_name']) && !isset($_POST['staff_name'])) {
     $customer_id = !empty($_POST['customer_id']) ? trim($_POST['customer_id']) : null;
     $customer_name = trim($_POST['customer_name']);
     $phone = trim($_POST['phone']);
@@ -62,7 +61,7 @@ if (isset($_POST['customer_name']) && !isset($_POST['order_id'])) {
 }
 
 // ========== ORDERS INSERT ==========
-if (isset($_POST['order_id']) && isset($_POST['customer_id']) && isset($_POST['staff_id'])) {
+elseif (isset($_POST['order_id']) && isset($_POST['customer_id']) && isset($_POST['staff_id'])) {
     $order_id = trim($_POST['order_id']);
     $customer_id = trim($_POST['customer_id']);
     $staff_id = trim($_POST['staff_id']);
@@ -119,7 +118,7 @@ if (isset($_POST['order_id']) && isset($_POST['customer_id']) && isset($_POST['s
 }
 
 // ========== MENU INSERT ==========
-if (isset($_POST['item_name']) && !isset($_POST['customer_name']) && !isset($_POST['staff_name'])) {
+elseif (isset($_POST['item_name'])) {
     $menu_id = !empty($_POST['menu_id']) ? trim($_POST['menu_id']) : null;
     $item_name = trim($_POST['item_name']);
     $price = floatval($_POST['price']);
@@ -161,7 +160,7 @@ if (isset($_POST['item_name']) && !isset($_POST['customer_name']) && !isset($_PO
 }
 
 // ========== STAFF INSERT ==========
-if (isset($_POST['staff_name']) && !isset($_POST['order_id']) && !isset($_POST['item_name'])) {
+elseif (isset($_POST['staff_name'])) {
     $staff_id = !empty($_POST['staff_id']) ? trim($_POST['staff_id']) : null;
     $staff_name = trim($_POST['staff_name']);
     $role = trim($_POST['role']);
@@ -203,7 +202,7 @@ if (isset($_POST['staff_name']) && !isset($_POST['order_id']) && !isset($_POST['
 }
 
 // ========== PAYMENT INSERT ==========
-if (isset($_POST['payment_id']) && isset($_POST['order_id']) && isset($_POST['amount'])) {
+elseif (isset($_POST['payment_id']) && isset($_POST['order_id']) && isset($_POST['amount'])) {
     $payment_id = !empty($_POST['payment_id']) ? trim($_POST['payment_id']) : null;
     $order_id = trim($_POST['order_id']);
     $amount = floatval($_POST['amount']);
@@ -234,34 +233,22 @@ if (isset($_POST['payment_id']) && isset($_POST['order_id']) && isset($_POST['am
     $check_payment->close();
     
     // Verify order exists
-    $check_order = $conn->prepare("SELECT order_id, (SELECT SUM(amount) FROM payment WHERE order_id = ?) as paid_amount FROM orders WHERE order_id = ?");
-    $check_order->bind_param("ss", $order_id, $order_id);
+    $check_order = $conn->prepare("SELECT order_id FROM orders WHERE order_id = ?");
+    $check_order->bind_param("s", $order_id);
     $check_order->execute();
-    $result = $check_order->get_result();
+    $check_order->store_result();
     
-    if ($result->num_rows == 0) {
+    if ($check_order->num_rows == 0) {
         redirectWithMessage("Error: Order ID '$order_id' does not exist. Please create order first.", true);
     }
-    
-    $order_data = $result->fetch_assoc();
-    $paid_amount = $order_data['paid_amount'] ?? 0;
-    
-    // Optional: Check if payment exceeds expected amount (you can add menu item total calculation later)
-    // For now, just warn but allow
-    if ($paid_amount > 0) {
-        // This is an additional payment for the same order
-        $check_order->close();
-    } else {
-        $check_order->close();
-    }
+    $check_order->close();
     
     // Insert payment
     $stmt = $conn->prepare("INSERT INTO payment (payment_id, order_id, amount, payment_mode) VALUES (?, ?, ?, ?)");
     $stmt->bind_param("ssds", $payment_id, $order_id, $amount, $payment_mode);
     
     if ($stmt->execute()) {
-        $mode_display = ($payment_mode == 'Other' && !empty($_POST['custom_payment_mode'])) ? $_POST['custom_payment_mode'] : $payment_mode;
-        redirectWithMessage("✓ Payment of ₹" . number_format($amount, 2) . " recorded successfully!\nOrder: $order_id\nMode: $mode_display");
+        redirectWithMessage("✓ Payment of ₹" . number_format($amount, 2) . " recorded successfully!\nOrder: $order_id\nMode: $payment_mode");
     } else {
         redirectWithMessage("Error processing payment: " . $stmt->error, true);
     }
@@ -269,7 +256,9 @@ if (isset($_POST['payment_id']) && isset($_POST['order_id']) && isset($_POST['am
 }
 
 // If no matching condition
-redirectWithMessage("Invalid request. Please use the proper form.", true);
+else {
+    redirectWithMessage("Invalid request. Please use the proper form.", true);
+}
 
 $conn->close();
 ?>
